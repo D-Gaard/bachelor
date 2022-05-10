@@ -71,3 +71,5 @@ def savePointsWithinSquare(allPoints_list,box_dim):
     z = data[2] + z_start2
     box[x,y,z] = 1
   
+  return box
+  
