@@ -3,6 +3,7 @@ import math
 import raster_geometry as rg
 import math
 from lineRenderAlgo import Bresenham3D
+import cv2
 
 #construction and functions for the 3d worldsetup and test figures
 #(primary,secondary) 0,1,3,4,6,7,8
@@ -35,6 +36,25 @@ def createTestCoordsForCircle(radius):
       if (circle[x, y] == 1):
         #map coordinates
         lines.append((SRC_TO_PATIENT, x_start - x, y_start-y))
+
+  return lines
+
+def createCoordsForImage(image):
+  image = cv2.imread(image,0)
+  image = np.where(image == 0, 0, 1)
+  image = image[1:,1:]
+  lines = []
+
+  half_image = (IMAGE_DIM-2)/2
+  x_start = half_image
+  y_start = half_image
+
+  #loop all pixels and save forground coordinates
+  for x in range(0, IMAGE_DIM-1):
+      for y in range(0, IMAGE_DIM-1):
+        if (image[x, y] == 1):
+          #map coordinates
+          lines.append((SRC_TO_PATIENT, x_start - x, y_start-y))
 
   return lines
 
