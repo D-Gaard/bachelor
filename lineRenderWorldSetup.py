@@ -4,6 +4,7 @@ import raster_geometry as rg
 import math
 from lineRenderAlgo import Bresenham3D
 import cv2
+from scipy.ndimage.interpolation import rotate as SR
 
 #construction and functions for the 3d worldsetup and test figures
 #(primary,secondary) 0,1,3,4,6,7,8
@@ -92,4 +93,32 @@ def savePointsWithinSquare(allPoints_list,box_dim):
     box[x,y,z] = 1
   
   return box
-  
+
+#convert box corrds to world corrs (box is centered in 0,0,0)
+def boxToWorldCorrds(box,box_dim):
+  box_coords_x = []
+  box_coords_y = []
+  box_coords_z = []
+
+  half = (box_dim - 1) / 2
+  for x in range(box_dim):
+    for y in range(box_dim):
+      for z in range(box_dim):
+        if box[x, y, z] == 1:
+          #unsure if it should  bed _ - half or opposite
+          box_coords_x.append(x-half)
+          box_coords_y.append(y-half)
+          box_coords_z.append(z-half)
+
+  return box_coords_x, box_coords_y , box_coords_z
+
+
+#rotate box based on primary and secondary angle around y first and then around x
+def rotatePrimSecond(box,prim,sec):
+  box2 = np.copy(box)
+
+  box2_rot1 = SR(box2, angle=prim, axes=(1, 2), reshape=False)
+  #scipy rotates then incorect way round the y axis so we revese the angle
+  box2_rot2 = SR(box2_rot1, angle=-sec, axes=(0, 2), reshape=False)
+
+  return box2_rot2
