@@ -20,3 +20,16 @@ def get3dBox(size):
   frame_z = np.array([-n, n, -n, n, -n, n, -n, n])
 
   return frame_x, frame_y, frame_z
+
+#take list of points and return everypoint in the box centered in 0,0,0 with dim
+def getPointsInBox(points,box_dim):
+  allPoints_list = []
+  xyz_max = (box_dim - 1) / 2
+  for i, data in enumerate(points):
+    x = data[0]
+    y = data[1]
+    z = data[2]
+    if (-xyz_max <= x <= xyz_max and -xyz_max <= y <= xyz_max and -xyz_max <= z <= xyz_max):
+      allPoints_list.append((x, y, z))
+  
+  return allPoints_list
