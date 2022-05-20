@@ -117,8 +117,8 @@ def boxToWorldCorrds(box,box_dim):
 def rotatePrimSecond(box,prim,sec):
   box2 = np.copy(box)
 
-  box2_rot1 = SR(box2, angle=prim, axes=(1, 2), reshape=False)
+  box2_rot1 = SR(box2, angle=prim, axes=(0, 1), reshape=False)
   #scipy rotates then incorect way round the y axis so we revese the angle
-  box2_rot2 = SR(box2_rot1, angle=-sec, axes=(0, 2), reshape=False)
+  box2_rot2 = SR(box2_rot1, angle=sec, axes=(0, 2), reshape=False)
 
   return box2_rot2
