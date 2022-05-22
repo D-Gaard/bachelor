@@ -113,7 +113,7 @@ def boxToWorldCorrds(box,box_dim):
   return box_coords_x, box_coords_y , box_coords_z
 
 
-#rotate box based on primary and secondary angle around y first and then around x
+#rotate box based on primary and secondary angle around z first and then reverse around y
 def rotatePrimSecond(box,prim,sec):
   box2 = np.copy(box)
 
