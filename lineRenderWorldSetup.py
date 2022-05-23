@@ -55,7 +55,8 @@ def createCoordsForImage(image):
       for y in range(0, IMAGE_DIM-1):
         if (image[x, y] == 1):
           #map coordinates
-          lines.append((SRC_TO_PATIENT, x_start - x, y_start-y))
+          #lines.append((SRC_TO_PATIENT, x_start - x, y_start-y))
+          lines.append((DETECTOR_TO_PATIENT, x_start - x, y_start-y))
 
   return lines
 
@@ -65,7 +66,7 @@ def performBresenham3D(lines,detector_to_patient,src_to_patient,box_dim):
 
   #Perform Bresenham3D for all points
   for i, points in enumerate(lines):
-    all_lineboxes = Bresenham3D(-detector_to_patient, 0, 0, src_to_patient, points[1], points[2])
+    all_lineboxes = Bresenham3D(-src_to_patient, 0, 0, detector_to_patient, points[1], points[2])
 
     #map box cords to world cords
     xyz_max = (box_dim - 1) / 2
