@@ -40,11 +40,15 @@ def createTestCoordsForCircle(radius):
 
   return lines
 
-def createCoordsForImage(image):
+def createCoordsForImage(image,flip):
   image = cv2.imread(image,0)
   image = np.where(image == 0, 0, 1)
   image = image[1:,1:]
   lines = []
+  if (flip):
+      #preform horizontal flip
+    image = image[:, ::-1, :]
+
 
   half_image = (IMAGE_DIM-2)/2
   x_start = half_image
