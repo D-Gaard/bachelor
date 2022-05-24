@@ -47,8 +47,7 @@ def createCoordsForImage(image,flip):
   lines = []
   if (flip):
       #preform horizontal flip
-    image = image[:, ::-1, :]
-
+    image = np.flip(image, axis=1)#image[:, ::-1, :]
 
   half_image = (IMAGE_DIM-2)/2
   x_start = half_image
@@ -135,7 +134,7 @@ def createCoordsForImageFrom3d(image, flip, img_dim):
   lines = []
   if (flip):
     #preform horizontal flip
-    image = image[:, ::-1, :]
+    image = np.flip(image,axis=1)#image[:, ::-1, :]
 
   half_image = (img_dim-1)/2
   x_start = half_image
