@@ -17,7 +17,12 @@ def get3dFigure(size,path):
   d_big = np.zeros([size, size, size])
   d_big[hs-133:hs+134, hs-108:hs+108, hs-134:hs+135] = d
 
-  return d_big
+  #rotate 90 to get correct orientation
+  box = np.copy(d_big)
+  box_rot = SR(box, angle=90, axes=(0, 1), reshape=False)
+  box_rot = np.where(box_rot > 0.5, 1, 0)
+  
+  return box_rot
 
 #get coords for outline box for visualization 
 def get3dBox(size):
