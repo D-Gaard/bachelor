@@ -34,17 +34,20 @@ def createTestCoordsForCircle(radius):
   #loop all pixels and save forground coordinates
   for x in range(0, IMAGE_DIM-1):
     for y in range(0, IMAGE_DIM-1):
-      if (circle[x, y] == 1):
+      if (circle[y, x] == 1):
         #map coordinates
         lines.append((SRC_TO_PATIENT, x_start - x, y_start-y))
 
   return lines
 
-def createCoordsForImage(image):
+def createCoordsForImage(image,flip):
   image = cv2.imread(image,0)
   image = np.where(image == 0, 0, 1)
   image = image[1:,1:]
   lines = []
+  if (flip):
+      #preform horizontal flip
+    image = np.flip(image, axis=1)#image[:, ::-1, :]
 
   half_image = (IMAGE_DIM-2)/2
   x_start = half_image
@@ -53,9 +56,10 @@ def createCoordsForImage(image):
   #loop all pixels and save forground coordinates
   for x in range(0, IMAGE_DIM-1):
       for y in range(0, IMAGE_DIM-1):
-        if (image[x, y] == 1):
+        if (image[y, x] == 1):
           #map coordinates
-          lines.append((SRC_TO_PATIENT, x_start - x, y_start-y))
+          #lines.append((SRC_TO_PATIENT, x_start - x, y_start-y))
+          lines.append((DETECTOR_TO_PATIENT, x_start - x, y_start-y))
 
   return lines
 
@@ -65,7 +69,7 @@ def performBresenham3D(lines,detector_to_patient,src_to_patient,box_dim):
 
   #Perform Bresenham3D for all points
   for i, points in enumerate(lines):
-    all_lineboxes = Bresenham3D(-detector_to_patient, 0, 0, src_to_patient, points[1], points[2])
+    all_lineboxes = Bresenham3D(-src_to_patient, 0, 0, detector_to_patient, points[1], points[2])
 
     #map box cords to world cords
     xyz_max = (box_dim - 1) / 2
@@ -122,3 +126,26 @@ def rotatePrimSecond(box,prim,sec):
   box2_rot2 = SR(box2_rot1, angle=sec, axes=(0, 2), reshape=False)
 
   return box2_rot2
+
+#crete corrds for image of specified size and allowed horizontal flip
+def createCoordsForImageFrom3d(image, flip, img_dim):
+  image = cv2.imread(image, 0)
+  image = np.where(image == 0, 0, 1)
+  lines = []
+  if (flip):
+    #preform horizontal flip
+    image = np.flip(image,axis=1)#image[:, ::-1, :]
+
+  half_image = (img_dim-1)/2
+  x_start = half_image
+  y_start = half_image
+
+  #loop all pixels and save forground coordinates
+  for x in range(0, img_dim):
+      for y in range(0, img_dim):
+        if (image[y, x] == 1):
+          #map coordinates
+          #lines.append((SRC_TO_PATIENT, x_start - x, y_start-y))
+          lines.append((DETECTOR_TO_PATIENT, x_start - x, y_start-y))
+
+  return lines
