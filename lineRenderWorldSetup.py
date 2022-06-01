@@ -149,3 +149,25 @@ def createCoordsForImageFrom3d(image, flip, img_dim):
           lines.append((DETECTOR_TO_PATIENT, x_start - x, y_start-y))
 
   return lines
+
+#crete corrds for loaded image of specified size and allowed horizontal flip
+def createCoordsForLoadedImageFrom3d(image, flip, img_dim):
+  image = np.where(image == 0, 0, 1)
+  lines = []
+  if (flip):
+    #preform horizontal flip
+    image = np.flip(image, axis=1)  # image[:, ::-1, :]
+
+  half_image = (img_dim-1)/2
+  x_start = half_image
+  y_start = half_image
+
+  #loop all pixels and save forground coordinates
+  for x in range(0, img_dim):
+      for y in range(0, img_dim):
+        if (image[y, x] == 1):
+          #map coordinates
+          #lines.append((SRC_TO_PATIENT, x_start - x, y_start-y))
+          lines.append((DETECTOR_TO_PATIENT, x_start - x, y_start-y))
+
+  return lines
