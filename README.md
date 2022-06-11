@@ -22,6 +22,7 @@ Note that all provided carm imaging data has been removed from the github.
   
 File explaniations Weka:  
 wekaEvaluation.ipynb - File for calculating weka model metrics.  
+weka_vALL.zip - File containing the trained weka model.  
 
 Folders explained  Weka:  
 WekaOut - Folder of Weka model predictions on test dataset.  
