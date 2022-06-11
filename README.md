@@ -23,14 +23,12 @@ Note that all provided carm imaging data has been removed from the github.
 File explaniations Weka:  
 wekaEvaluation.ipynb - File for calculating weka model metrics.  
 
-Folders explained  Weka:
+Folders explained  Weka:  
 WekaOut - Folder of Weka model predictions on test dataset.  
 
 File explaniations Unet:  
 getData - File responsible for creating Test/Train/Validation and retriving the files.  
-
 createThresholds4All.ipynb - File for thresholding images.  
-
 createHistograms4All.ipynb - Create histograms for image sequences.  
 
 Folders explained Unet:  
