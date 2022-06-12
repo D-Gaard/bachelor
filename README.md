@@ -1,8 +1,9 @@
 # Bachelor Thesis Repository
-Contains all code written durring bachelor project regarding "Sparse angle reconstruction using angio-
-graphic images" by Andreas Leerbeck, Mads Daugaard \& Emil Riis-Jacobsen
+Contains all code written durring bachelor project regarding "sparse angle reconstruction using segmented coronary angiograms" by Andreas Leerbeck, Mads Daugaard \& Emil Riis-Jacobsen.  
 
-Handed in: June 13. 2022
+Faculty of Science University of Copenhagen.  
+
+Handed in: June 13. 2022.  
 
 # Versions
 Python v.3.9.0  
