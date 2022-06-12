@@ -31,11 +31,18 @@ File explaniations Unet:
 getData.py - File responsible for creating Test/Train/Validation and retriving the files.  
 createThresholds4All.ipynb - File for thresholding images.  
 createHistograms4All.ipynb - Create histograms for image sequences.  
+ALL_4l_rotFlip_1000epochs.pth - Best trained model.  
+model_train.ipynb - Unet training file.  
+model_metrics.ipynb - Calculate metrics on model with and without post processing.  
+predictSegmentations.ipynb - load model and predict on test data.  
+
 
 Folders explained Unet:  
-Prototype - Contains files used to prototype and test functionality  
-Visualisation - Contains files used to create visuals for the report  
-TestSegmentations - Best trained models prediction on test data   
+Prototype - Contains files used to prototype and test functionality.  
+Visualisation - Contains files used to create visuals for the report.  
+TestSegmentations - Best trained models prediction on test data.  
+SegmentationModels - Folder containing all trained Unet models.    
+    
 
 File explaniations 3D:  
 project3dTo2d.ipynb - File for creating perspective projections of digital 3D model  
